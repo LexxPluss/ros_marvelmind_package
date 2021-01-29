@@ -67,6 +67,8 @@ struct RawIMUValue
 
 struct FusionIMUValue
 {
+    uint8_t address;
+
     int32_t x;
     int32_t y;
     int32_t z;// coordinates in mm

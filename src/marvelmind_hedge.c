@@ -512,7 +512,26 @@ static void process_imu_raw_datagram(struct MarvelmindHedge * hedge, uint8_t *bu
 
 static void process_imu_fusion_datagram(struct MarvelmindHedge * hedge, uint8_t *buffer)
 {uint8_t *dataBuf= &buffer[5];
-	
+
+    /* tmp */
+    uint8_t real_values_count=hedge->maxBufferedPositions;
+    uint8_t address = 0;
+    if (hedge->lastValuesCount_<real_values_count)
+        real_values_count=hedge->lastValuesCount_;
+    for (int i=0; i<real_values_count; i++)
+    {
+        if (address != 0)
+            if (hedge->positionBuffer[i].address != address)
+                continue;
+        if (!hedge->positionBuffer[i].ready)
+            continue;
+        if (hedge->positionBuffer[i].processed)
+            continue;
+        if (address == 0)
+            address= hedge->positionBuffer[i].address;
+    }
+    hedge->fusionIMU.address = address;
+    /* tmp */
     hedge->fusionIMU.x= get_int32(&dataBuf[0]);
     hedge->fusionIMU.y= get_int16(&dataBuf[4]);
     hedge->fusionIMU.z= get_int16(&dataBuf[8]);
