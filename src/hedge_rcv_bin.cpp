@@ -237,6 +237,7 @@ static bool hedgeIMUFusionReceiveCheck(void)
   hedge_imu_fusion_msg.az= hedge->fusionIMU.az/1000.0;
   
   hedge_imu_fusion_msg.timestamp_ms= hedge->fusionIMU.timestamp;
+  hedge_imu_fusion_msg.address= hedge->fusionIMU.address;
   
   hedge->fusionIMU.updated= false;
   
@@ -429,7 +430,8 @@ int main(int argc, char **argv)
     
     if (hedgeIMUFusionReceiveCheck())
     {
-		ROS_INFO("IMU fusion: Timestamp: %08d, X=%.3f  Y= %.3f  Z=%.3f  q=%.3f,%.3f,%.3f,%.3f v=%.3f,%.3f,%.3f  a=%.3f,%.3f,%.3f", 	
+		ROS_INFO("IMU fusion: Address=%d, Timestamp: %08d, X=%.3f  Y= %.3f  Z=%.3f  q=%.3f,%.3f,%.3f,%.3f v=%.3f,%.3f,%.3f  a=%.3f,%.3f,%.3f",
+                (float) hedge_imu_fusion_msg.address,
 				(int) hedge_imu_fusion_msg.timestamp_ms,
 				(float) hedge_imu_fusion_msg.x_m, (float) hedge_imu_fusion_msg.y_m, (float) hedge_imu_fusion_msg.z_m,
 				(float) hedge_imu_fusion_msg.qw, (float) hedge_imu_fusion_msg.qx, (float) hedge_imu_fusion_msg.qy, (float) hedge_imu_fusion_msg.qz,
