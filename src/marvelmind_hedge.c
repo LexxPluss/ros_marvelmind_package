@@ -530,7 +530,9 @@ static void process_imu_fusion_datagram(struct MarvelmindHedge * hedge, uint8_t 
         if (address == 0)
             address= hedge->positionBuffer[i].address;
     }
+    /* std::cout << "address::(.c) " << address << std::endl; */
     hedge->fusionIMU.address = address;
+    /* hedge->fusionIMU.address = get_int32(&buffer[0]); */
     /* tmp */
     hedge->fusionIMU.x= get_int32(&dataBuf[0]);
     hedge->fusionIMU.y= get_int16(&dataBuf[4]);
