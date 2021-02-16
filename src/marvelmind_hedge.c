@@ -490,7 +490,7 @@ static void process_beacons_positions_highres_datagram(struct MarvelmindHedge * 
 
 static void process_imu_raw_datagram(struct MarvelmindHedge * hedge, uint8_t *buffer)
 {uint8_t *dataBuf= &buffer[5];
-	
+
     hedge->rawIMU.acc_x= get_int16(&dataBuf[0]);
     hedge->rawIMU.acc_y= get_int16(&dataBuf[2]);
     hedge->rawIMU.acc_z= get_int16(&dataBuf[4]);
@@ -505,8 +505,9 @@ static void process_imu_raw_datagram(struct MarvelmindHedge * hedge, uint8_t *bu
     hedge->rawIMU.compass_y= get_int16(&dataBuf[14]);
     hedge->rawIMU.compass_z= get_int16(&dataBuf[16]);
 
+    hedge->rawIMU.address= get_int16(&dataBuf[18]);
     hedge->rawIMU.timestamp= get_uint32(&dataBuf[24]);
-    
+
     hedge->rawIMU.updated= true;
 }
 

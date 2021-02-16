@@ -114,7 +114,6 @@ static bool hedgeReceiveCheck(void)
     {
         struct PositionValue position;
         getPositionFromMarvelmindHedge (hedge, &position);
-        
         hedge_pos_msg.address= position.address;
         hedge_pos_ang_msg.address= position.address;
         
@@ -194,7 +193,7 @@ static bool hedgeIMURawReceiveCheck(void)
 {
   if (!hedge->rawIMU.updated)
      return false;
-     
+
   hedge_imu_raw_msg.acc_x= hedge->rawIMU.acc_x;
   hedge_imu_raw_msg.acc_y= hedge->rawIMU.acc_y;
   hedge_imu_raw_msg.acc_z= hedge->rawIMU.acc_z;
@@ -206,7 +205,8 @@ static bool hedgeIMURawReceiveCheck(void)
   hedge_imu_raw_msg.compass_x= hedge->rawIMU.compass_x;
   hedge_imu_raw_msg.compass_y= hedge->rawIMU.compass_y;
   hedge_imu_raw_msg.compass_z= hedge->rawIMU.compass_z;
-  
+
+  hedge_imu_raw_msg.address= hedge->rawIMU.address;
   hedge_imu_raw_msg.timestamp_ms= hedge->rawIMU.timestamp;
   
   hedge->rawIMU.updated= false;

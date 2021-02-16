@@ -59,7 +59,8 @@ struct RawIMUValue
     int16_t compass_x;
     int16_t compass_y;
     int16_t compass_z;
-    
+
+    uint8_t address;
     uint32_t timestamp;
     
     bool updated;
